@@ -1,0 +1,44 @@
+h1 {
+    text-transform: uppercase;
+    font-family: 'Raleway', sans-serif;
+    margin-bottom: 1.0em;
+}
+
+h3 {
+    font-family: 'Lato', sans-serif;
+    margin-bottom: 1.0em;
+}
+
+#start-btn {
+    margin: 0 auto;
+    display: block;
+}
+
+#home-img {
+    width: 900px;
+    margin: 0 auto 2em auto;
+    display: block;
+}
+
+button a {
+    color: lightgrey;
+}
+
+a.nostyle:link {
+    text-decoration: inherit;
+    color: inherit;
+}
+
+a.nostyle:visited {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
+}
+
+.card {
+    margin: 10px 10px;
+}
+
+* {
+    background-color: #E9ECF0;
+}

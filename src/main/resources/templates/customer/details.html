@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:include="fragments/header :: header">
+</head>
+<body>
+
+<div class="jumbotron jumbotron-fluid">
+
+    <div class="container">
+
+        <h1 class="text-center"><a class="nostyle" th:href="@{/}">Luxclusif</a></h1>
+
+        <h3>Customer Details</h3>
+
+        <table class="table table-bordered" th:object="${customer}">
+            <tr>
+                <th>First name</th>
+                <td th:text="*{firstName}"></td>
+            </tr>
+            <tr>
+                <th>Last name</th>
+                <td th:text="*{lastName}"></td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td th:text="*{email}"></td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td th:text="*{phone}"></td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td th:text="*{address}"></td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td th:text="*{city}"></td>
+            </tr>
+            <tr>
+                <th>Country</th>
+                <td th:text="*{country}"></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button type="button" class="btn btn-info"><a class="nostyle" th:href="@{'/luxclusif/customer/' + *{id} + '/edit'}">Edit</a></button>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteCustomerModal">Delete</button>
+                </td>
+            </tr>
+        </table>
+
+        <!--List of this customer's products-->
+        <h3>Products Submitted</h3>
+
+        <table class="table table-bordered">
+            <tr>
+                <th>ID</th>
+                <th>Brand</th>
+                <th>Year of purchase</th>
+                <th>Condition</th>
+                <th>Price</th>
+                <th>Images</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            <tr th:each="product: ${customer.products}">
+                <td th:text="${product.id}"></td>
+                <td th:text="${product.brand}"></td>
+                <td th:text="${product.yearOfPurchase}"></td>
+                <td th:text="${product.productCondition}"></td>
+                <td th:text="${product.price}"></td>
+                <td><a th:href="@{'/luxclusif/customer/' + ${customer.id} + '/product/' + ${product.id} + '/images'}">Images</a></td>
+                <td><button type="button" class="btn btn-info"><a class="nostyle" th:href="@{'/luxclusif/customer/' + ${customer.id} + '/product/' + ${product.id} + '/edit'}">Edit</a></button></td>
+                <td>
+                    <form th:action="@{'/luxclusif/customer/' + ${customer.id} + '/product/' + ${product.id} + '/delete'}" method="post">
+                        <button class="btn btn-danger" type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="8"><a class="btn btn-primary" th:href="@{'/luxclusif/customer/' + ${customer.id} + '/product/add'}">Add product</a></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!--Delete Customer Modal-->
+<div class="modal fade" id="deleteCustomerModal" tabindex="-1" aria-labelledby="customerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="customerModalLabel">Delete Customer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>If you delete your registry, all your submitted products will be deleted too.
+                    Are you sure you want to proceed?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                <form th:action="@{'/luxclusif/customer/' + *{id} + '/delete'}" method="post" th:object="${customer}">
+                    <input type="hidden" name="delete-id" th:field="*{id}">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

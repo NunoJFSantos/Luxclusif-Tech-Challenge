@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:include="fragments/header :: header">
+</head>
+<body>
+
+<div class="jumbotron jumbotron-fluid">
+
+    <div class="container">
+
+        <h1 class="text-center"><a class="nostyle" th:href="@{/}">Luxclusif</a></h1>
+
+        <h3>Products</h3>
+
+        <table class="table table-bordered">
+            <tr>
+                <th>ID</th>
+                <th>Brand</th>
+                <th>Year of purchase</th>
+                <th>Condition</th>
+                <th>Price</th>
+                <th>Images</th>
+                <th>Customer</th>
+            </tr>
+            <tr th:each="product: ${products}">
+                <td th:text="${product.id}"></td>
+                <td th:text="${product.brand}"></td>
+                <td th:text="${product.yearOfPurchase}"></td>
+                <td th:text="${product.productCondition}"></td>
+                <td th:text="${product.price}"></td>
+                <td><a href="#">Images</a></td>
+                <td><a th:href="@{'/luxclusif/customer/' + ${product.customer.id}}">Contacts</a></td>
+            </tr>
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

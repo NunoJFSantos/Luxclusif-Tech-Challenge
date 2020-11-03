@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:include="fragments/header :: header">
+</head>
+<body>
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+
+        <h1 class="text-center"><a class="nostyle" th:href="@{/}">Luxclusif</a></h1>
+
+        <h3>Product Form</h3>
+
+        <form id="product-form" enctype="multipart/form-data"
+              th:action="@{'/luxclusif/customer/' + ${customer.id} + '/product/add'}" th:object="${product}"
+              method="POST">
+
+            <input name="product-id" type="hidden" th:field="*{id}">
+
+            <table id="product-input" class="table table-bordered">
+                <tr>
+                    <th>Brand</th>
+                    <th>Year of Purchase</th>
+                    <th>Condition</th>
+                    <th>Price</th>
+                </tr>
+                <tr>
+                    <td><select name="brand" class="form-control" th:field="*{brand}">
+                        <option value="AlexanderMcQueen">Alexander McQueen</option>
+                        <option value="Balenciaga">Balenciaga</option>
+                        <option value="Burberry">Burberry</option>
+                        <option value="Cartier">Cartier</option>
+                        <option value="Chanel">Chanel</option>
+                        <option value="Dior">Dior</option>
+                        <option value="Fendi">Fendi</option>
+                        <option value="Gucci">Gucci</option>
+                        <option value="Hermes">Hermès</option>
+                        <option value="Loewe">Loewe</option>
+                        <option value="LouisVuitton">Louis Vuitton</option>
+                        <option value="MCM">MCM</option>
+                        <option value="Prada">Prada</option>
+                        <option value="Valentino">Valentino</option>
+                        <option value="Versace">Versace</option>
+                        <option value="YSL">YSL</option>
+                    </select>
+                        <span th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}"></span></td>
+                    <td><input id="year" name="year" type="text" class="form-control input-lg"
+                               th:field="*{yearOfPurchase}">
+                        <span th:if="${#fields.hasErrors('yearOfPurchase')}" th:errors="*{yearOfPurchase}"></span></td>
+                    <td><select id="condition" name="condition" class="form-control" th:field="*{productCondition}">
+                        <option value="destroyed">Destroyed</option>
+                        <option value="damaged">Damaged</option>
+                        <option value="good">Good</option>
+                        <option value="excellent">Excellent</option>
+                        <option value="brandnew">Brand-new</option>
+                    </select>
+                        <span th:if="${#fields.hasErrors('productCondition')}" th:errors="*{productCondition}"></span>
+                    </td>
+                    <td><input type="text" name="price" class="form-control input-lg" th:field="*{price}"></td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <div class="form-group">
+                            <label for="addImageFile">Add photos</label>
+                            <input type="file" name="files" class="form-control-file" id="addImageFile" multiple>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <button type="submit" class="btn btn-info">Submit</button>
+                        <button type="button" class="btn btn-dark">
+                            <a class="nostyle" th:href="@{'/luxclusif/customer/' + ${customer.id} + '/product/add'}">Reset</a>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+
+    </div>
+</div>
+
+</body>
+</html>
